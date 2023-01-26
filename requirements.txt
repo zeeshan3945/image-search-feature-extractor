@@ -1,3 +1,6 @@
 sanic==22.6.2
-transformers
+torch
+torchvision
+json_tricks
+numpy
 accelerate

@@ -1,13 +1,20 @@
-# In this file, we define download_model
-# It runs during container build time to get model weights built into the container
-
-# In this example: A Huggingface BERT model
-
-from transformers import pipeline
+import torch
+from torchvision import transforms, models
 
 def download_model():
-    # do a dry run of loading the huggingface model, which will download weights
-    pipeline('fill-mask', model='bert-base-uncased')
+    # Load the pretrained VGG16 model
+    print("downloading the model...")
+    model = models.vgg16(pretrained=True)
+
+    # Extract the features, pooling, flatten, and classifier layers
+    features = list(model.features)
+    pooling = model.avgpool
+    flatten = torch.nn.Flatten()
+    fc = model.classifier[0]
+
+    # Create a sequential model with the extracted layers
+    model = torch.nn.Sequential(*features, pooling, flatten, fc)
+    print("Done...")
 
 if __name__ == "__main__":
     download_model()

@@ -2,9 +2,14 @@
 # Run it with `python3 test.py``
 
 import requests
+import base64
+import json_tricks as json
 
-model_inputs = {'prompt': 'Hello I am a [MASK] model.'}
 
-res = requests.post('http://localhost:8000/', json = model_inputs)
+path = '/Users/zeeshan/Documents/Qdrant-App/coin_images/1695.jpg'
+image_file = open(path, 'rb')
+image_data = base64.b64encode(image_file.read()).decode('utf-8')
+
+res = requests.post('http://localhost:8000/', json = {"prompt" : image_data})
 
 print(res.json())
