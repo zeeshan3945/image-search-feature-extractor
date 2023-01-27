@@ -7,7 +7,8 @@ def download_model():
     model = models.vgg16(pretrained=True)
 
     # Extract the features, pooling, flatten, and classifier layers
-    features = list(model.features)
+    #features = list(model.features)
+    features = torch.nn.ModuleList(list(model.features))
     pooling = model.avgpool
     flatten = torch.nn.Flatten()
     fc = model.classifier[0]
