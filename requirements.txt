@@ -1,6 +1,0 @@
-sanic==22.6.2
-torch==1.13.1
-torchvision==0.14.1
-json_tricks
-numpy
-accelerate
